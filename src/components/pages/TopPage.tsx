@@ -1,13 +1,12 @@
-import { Checkbox } from '../atoms/Checkbox';
-import { PrefectureLabel } from '../atoms/PrefectureLabel';
+import { PrefectureItem } from '../molecules/PrefectureItem';
 import { Header } from '../organisms/Header';
+import { PrefectureLists } from '../organisms/PrefectureLists';
 
 export const TopPage = (): JSX.Element => {
   return (
     <>
       <Header />
-      <Checkbox />
-      <PrefectureLabel />
+      <PrefectureLists />
     </>
   );
 };
