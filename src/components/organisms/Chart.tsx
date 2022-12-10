@@ -1,17 +1,10 @@
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { useFetchPopulationDataForChart } from 'src/api/hook/useFetchPopulationDataForChart';
 import { ErrorAlert } from './ErrorAlert';
 import { LoadingSpinner } from './LoadingSpinner';
 import { UnSelectedAlert } from './UnSelectedAlert';
+
+import styles from './Chart.module.scss';
 
 export const Chart = (): JSX.Element => {
   const { selectedPrefs, formattedData, error } = useFetchPopulationDataForChart();
@@ -32,27 +25,26 @@ export const Chart = (): JSX.Element => {
   }
 
   return (
-    <ResponsiveContainer width='100%' height='100%'>
-      <LineChart
-        width={500}
-        height={300}
-        data={formattedData}
-        margin={{
-          top: 5,
-          right: 30,
-          left: 20,
-          bottom: 5,
-        }}
-      >
-        <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='year' />
-        <YAxis />
-        <Tooltip />
-        <Legend />
-        {selectedPrefs.map((pref) => (
-          <Line key={pref.prefCode} dataKey={pref.prefName} />
-        ))}
-      </LineChart>
-    </ResponsiveContainer>
+    <LineChart
+      className={styles.chart}
+      width={500}
+      height={300}
+      data={formattedData}
+      margin={{
+        top: 5,
+        right: 30,
+        left: 20,
+        bottom: 5,
+      }}
+    >
+      <CartesianGrid strokeDasharray='3 3' />
+      <XAxis dataKey='year' />
+      <YAxis />
+      <Tooltip />
+      <Legend />
+      {selectedPrefs.map((pref) => (
+        <Line key={pref.prefCode} dataKey={pref.prefName} />
+      ))}
+    </LineChart>
   );
 };
