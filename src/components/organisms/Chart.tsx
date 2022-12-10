@@ -1,38 +1,13 @@
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { useFetchPopulationDataForChart } from 'src/api/hook/useFetchPopulationDataForChart';
 import { ErrorAlert } from './ErrorAlert';
 import { LoadingSpinner } from './LoadingSpinner';
+import { UnSelectedAlert } from './UnSelectedAlert';
 
-const examplePrefs = [
-  {
-    prefCode: 1,
-    prefName: '北海道',
-  },
-  {
-    prefCode: 2,
-    prefName: '青森県',
-  },
-  {
-    prefCode: 3,
-    prefName: '岩手県',
-  },
-  {
-    prefCode: 4,
-    prefName: '宮城県',
-  },
-];
+import styles from './Chart.module.scss';
 
 export const Chart = (): JSX.Element => {
-  const { formattedData, error } = useFetchPopulationDataForChart(examplePrefs);
+  const { selectedPrefs, formattedData, error } = useFetchPopulationDataForChart();
 
   // 人口構成取得時にエラーが発生した場合
   if (error != null) {
@@ -40,12 +15,18 @@ export const Chart = (): JSX.Element => {
   }
 
   // ローディング中
-  if (formattedData == null) {
+  if (selectedPrefs.length !== 0 && formattedData == null) {
     return <LoadingSpinner />;
+  }
+
+  // 何も選択されていない場合
+  if (selectedPrefs.length === 0) {
+    return <UnSelectedAlert />;
   }
 
   return (
     <LineChart
+      className={styles.chart}
       width={500}
       height={300}
       data={formattedData}
@@ -61,7 +42,7 @@ export const Chart = (): JSX.Element => {
       <YAxis />
       <Tooltip />
       <Legend />
-      {examplePrefs.map((pref) => (
+      {selectedPrefs.map((pref) => (
         <Line key={pref.prefCode} dataKey={pref.prefName} />
       ))}
     </LineChart>
