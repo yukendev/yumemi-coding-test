@@ -9,34 +9,12 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { useFetchPopulationDataForChart } from 'src/api/hook/useFetchPopulationDataForChart';
-import { useSelectedPrefecturesState } from 'src/store/selectedPrefecturesState';
 import { ErrorAlert } from './ErrorAlert';
 import { LoadingSpinner } from './LoadingSpinner';
-
-const examplePrefs = [
-  {
-    prefCode: 1,
-    prefName: '北海道',
-  },
-  {
-    prefCode: 2,
-    prefName: '青森県',
-  },
-  {
-    prefCode: 3,
-    prefName: '岩手県',
-  },
-  {
-    prefCode: 4,
-    prefName: '宮城県',
-  },
-];
+import { UnSelectedAlert } from './UnSelectedAlert';
 
 export const Chart = (): JSX.Element => {
-  const { formattedData, error } = useFetchPopulationDataForChart(examplePrefs);
-  const selected = useSelectedPrefecturesState();
-
-  console.log('グラフレンダリング', selected);
+  const { selectedPrefs, formattedData, error } = useFetchPopulationDataForChart();
 
   // 人口構成取得時にエラーが発生した場合
   if (error != null) {
@@ -44,30 +22,37 @@ export const Chart = (): JSX.Element => {
   }
 
   // ローディング中
-  if (formattedData == null) {
+  if (selectedPrefs.length !== 0 && formattedData == null) {
     return <LoadingSpinner />;
   }
 
+  // 何も選択されていない場合
+  if (selectedPrefs.length === 0) {
+    return <UnSelectedAlert />;
+  }
+
   return (
-    <LineChart
-      width={500}
-      height={300}
-      data={formattedData}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5,
-      }}
-    >
-      <CartesianGrid strokeDasharray='3 3' />
-      <XAxis dataKey='year' />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      {examplePrefs.map((pref) => (
-        <Line key={pref.prefCode} dataKey={pref.prefName} />
-      ))}
-    </LineChart>
+    <ResponsiveContainer width='100%' height='100%'>
+      <LineChart
+        width={500}
+        height={300}
+        data={formattedData}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray='3 3' />
+        <XAxis dataKey='year' />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        {selectedPrefs.map((pref) => (
+          <Line key={pref.prefCode} dataKey={pref.prefName} />
+        ))}
+      </LineChart>
+    </ResponsiveContainer>
   );
 };

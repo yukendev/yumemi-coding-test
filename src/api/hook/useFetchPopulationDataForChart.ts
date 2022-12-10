@@ -1,15 +1,20 @@
-import { PopulationDataForChart, Prefecture } from '@commonType';
+import { PopulationDataForChart } from '@commonType';
 import { useEffect, useState } from 'react';
+import { useSelectedPrefecturesState } from 'src/store/selectedPrefecturesState';
 import { formatDataForChart } from 'src/utils/formatDataForChart';
 import { fetchPopulation } from '../fetcher';
 
-export const useFetchPopulationDataForChart = (prefs: Prefecture[]) => {
+export const useFetchPopulationDataForChart = () => {
   const [formattedData, setFormattedData] = useState<PopulationDataForChart>();
   const [error, setError] = useState<string>();
+  const selectedPrefs = useSelectedPrefecturesState();
 
   useEffect(() => {
-    const fetch = async (prefs: Prefecture[]) => {
-      const fetcherList = prefs.map((pref) => {
+    const fetch = async () => {
+      if (selectedPrefs.length === 0) {
+        return;
+      }
+      const fetcherList = selectedPrefs.map((pref) => {
         return fetchPopulation(pref);
       });
 
@@ -21,14 +26,17 @@ export const useFetchPopulationDataForChart = (prefs: Prefecture[]) => {
         const formattedData = formatDataForChart(results);
 
         setFormattedData(formattedData);
+        setError(undefined);
       } catch (error) {
+        console.log(error);
         setError('都道府県コードから総人口が取得できませんでした');
       }
     };
-    fetch(prefs);
-  }, [prefs]);
+    fetch();
+  }, [selectedPrefs]);
 
   return {
+    selectedPrefs,
     formattedData,
     error,
   };

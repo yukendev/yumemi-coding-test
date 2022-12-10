@@ -5,11 +5,10 @@ import { PrefectureLabel } from '../atoms/PrefectureLabel';
 import styles from './PrefectureItem.module.scss';
 
 export const PrefectureItem = (props: Prefecture): JSX.Element => {
-  const { prefCode, prefName } = props;
+  const { prefName } = props;
   const { togglePrefectureSelect } = useTogglePrefecture(props);
 
   const onChangeHandler = () => {
-    console.log('チェックボックス');
     togglePrefectureSelect();
   };
 
