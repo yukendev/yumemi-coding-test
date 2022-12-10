@@ -16,5 +16,10 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"]
+  "include": ["src"],
+  "baseUrl": "./",
+  "paths": {
+    "@commonType": ["src/commonType.ts"],
+    "@responseType": ["src/api/responseType.ts"]
+  }
 }
