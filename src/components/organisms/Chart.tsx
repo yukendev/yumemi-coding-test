@@ -9,6 +9,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { useFetchPopulationDataForChart } from 'src/api/hook/useFetchPopulationDataForChart';
+import { useSelectedPrefecturesState } from 'src/store/selectedPrefecturesState';
 import { ErrorAlert } from './ErrorAlert';
 import { LoadingSpinner } from './LoadingSpinner';
 
@@ -33,6 +34,9 @@ const examplePrefs = [
 
 export const Chart = (): JSX.Element => {
   const { formattedData, error } = useFetchPopulationDataForChart(examplePrefs);
+  const selected = useSelectedPrefecturesState();
+
+  console.log('グラフレンダリング', selected);
 
   // 人口構成取得時にエラーが発生した場合
   if (error != null) {
