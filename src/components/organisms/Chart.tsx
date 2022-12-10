@@ -9,13 +9,33 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { useFetchPopulationFromPrefCode } from 'src/api/hook/useFetchPopulationFromPrefCode';
+import { useFetchPopulationDataForChart } from 'src/api/hook/useFetchPopulationDataForChart';
 import { LoadingSpinner } from './LoadingSpinner';
 
+const examplePrefs = [
+  {
+    prefCode: 1,
+    prefName: '北海道',
+  },
+  {
+    prefCode: 2,
+    prefName: '青森県',
+  },
+  {
+    prefCode: 3,
+    prefName: '岩手県',
+  },
+  {
+    prefCode: 4,
+    prefName: '宮城県',
+  },
+];
+
 export const Chart = (): JSX.Element => {
-  const { populationData, error } = useFetchPopulationFromPrefCode(1);
+  const { formattedData, error } = useFetchPopulationDataForChart(examplePrefs);
 
   // ローディング中
-  if (populationData == null) {
+  if (formattedData == null) {
     return <LoadingSpinner />;
   }
 
@@ -23,7 +43,7 @@ export const Chart = (): JSX.Element => {
     <LineChart
       width={500}
       height={300}
-      data={populationData}
+      data={formattedData}
       margin={{
         top: 5,
         right: 30,
@@ -36,7 +56,10 @@ export const Chart = (): JSX.Element => {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Line type='monotone' dataKey='value' stroke='#82ca9d' />
+      <Line type='monotone' dataKey='北海道' stroke='#82ca9d' />
+      <Line type='monotone' dataKey='青森県' stroke='#82ca9d' />
+      <Line type='monotone' dataKey='岩手県' stroke='#82ca9d' />
+      <Line type='monotone' dataKey='宮城県' stroke='#82ca9d' />
     </LineChart>
   );
 };
