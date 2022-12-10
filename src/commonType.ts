@@ -8,6 +8,10 @@ export type PopulationData = {
   value: number;
 };
 
+export type SelectedPrefectures = {
+  selectedPrefectures: Prefecture[] | undefined;
+};
+
 export type PrefectureWithPopulation = {
   prefCode: number;
   prefName: string;
