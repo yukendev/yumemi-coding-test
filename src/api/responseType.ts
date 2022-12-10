@@ -1,6 +1,19 @@
-import { Prefecture } from '@commonType';
+import { Prefecture, PopulationData, PopulationDataType } from '@commonType';
 
+// 参考: https://opendata.resas-portal.go.jp/docs/api/v1/prefectures.html
 export type APIResponsePrefLists = {
   message: string | null;
   result: Prefecture[];
+};
+
+// 参考: https://opendata.resas-portal.go.jp/docs/api/v1/population/composition/perYear.html
+export type APIResponsePopulationFromPrefCode = {
+  message: string | null;
+  result: {
+    boundaryYear: number; // 実績値と推計値の区切り年
+    data: {
+      label: PopulationDataType;
+      data: PopulationData[];
+    }[];
+  };
 };
