@@ -1,38 +1,23 @@
-import { PopulationDataForChart, Prefecture, PrefectureWithPopulation } from '@commonType';
-import { APIResponsePopulationFromPrefCode } from '@responseType';
+import { PopulationDataForChart, Prefecture } from '@commonType';
 import { useEffect, useState } from 'react';
 import { formatDataForChart } from 'src/utils/formatDataForChart';
-import { fetcher } from '../fetcher';
-import { URL_GET_POPULATION_FROM_PREF_CODE } from '../urls';
+import { fetchPopulation } from '../fetcher';
 
 export const useFetchPopulationDataForChart = (prefs: Prefecture[]) => {
   const [formattedData, setFormattedData] = useState<PopulationDataForChart>();
   const [error, setError] = useState<string>();
 
-  const getPopulationFromPrefCode = async (pref: Prefecture): Promise<PrefectureWithPopulation> => {
-    const url = URL_GET_POPULATION_FROM_PREF_CODE(pref.prefCode);
-    const res = await fetcher<APIResponsePopulationFromPrefCode>(url);
-    if (res.result == null) {
-      throw Error();
-    }
-    const populationData = res.result.data.filter((data) => data.label === '総人口')[0];
-    return {
-      prefCode: pref.prefCode,
-      prefName: pref.prefName,
-      populationDataList: populationData.data,
-    };
-  };
-
   useEffect(() => {
-    // 都道府県コードから人口構成を取得
-    const fetchPopulation = async (prefs: Prefecture[]) => {
+    const fetch = async (prefs: Prefecture[]) => {
       const fetcherList = prefs.map((pref) => {
-        return getPopulationFromPrefCode(pref);
+        return fetchPopulation(pref);
       });
 
       try {
+        // 選択されている都道府県の全てのデータを取得
         const results = await Promise.all(fetcherList);
 
+        // 取得したデータをグラフ用に整形
         const formattedData = formatDataForChart(results);
 
         setFormattedData(formattedData);
@@ -40,7 +25,7 @@ export const useFetchPopulationDataForChart = (prefs: Prefecture[]) => {
         setError('都道府県コードから総人口が取得できませんでした');
       }
     };
-    fetchPopulation(prefs);
+    fetch(prefs);
   }, [prefs]);
 
   return {
