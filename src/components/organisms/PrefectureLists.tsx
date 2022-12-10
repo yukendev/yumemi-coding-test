@@ -3,9 +3,15 @@ import { PrefectureItem } from '../molecules/PrefectureItem';
 import styles from './PrefectureLists.module.scss';
 import { useFetchPrefLists } from '../../api/hook/useFetchPrefLists';
 import { LoadingSpinner } from './LoadingSpinner';
+import { ErrorAlert } from './ErrorAlert';
 
 export const PrefectureLists = (): JSX.Element => {
-  const { prefectures } = useFetchPrefLists();
+  const { prefectures, error } = useFetchPrefLists();
+
+  // 都道府県取得時にエラーが発生した場合
+  if (error != null) {
+    return <ErrorAlert message={error} />;
+  }
 
   // ローディング中
   if (prefectures == null) {
