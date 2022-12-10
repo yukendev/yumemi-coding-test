@@ -2,7 +2,7 @@ import { PopulationDataForChart, PrefectureWithPopulation } from '@commonType';
 
 // 複数都道府県の人口構成データの配列を受け取って、グラフ用のデータに整形するメソッド
 export const formatDataForChart = (prefectureWithPopulationList: PrefectureWithPopulation[]) => {
-  // 年だけを年だけを含んだオブジェクトの配列を作成
+  // 年だけを含んだオブジェクトの配列を作成
   const formattedData: PopulationDataForChart =
     prefectureWithPopulationList[0].populationDataList.map((populationData) => {
       return {
@@ -10,7 +10,7 @@ export const formatDataForChart = (prefectureWithPopulationList: PrefectureWithP
       };
     });
 
-  // それぞれのデータをマージしていく
+  // 各都道府県の人口構成のデータをマージしていく
   prefectureWithPopulationList.forEach((prefectureWithPopulation) => {
     const prefName = prefectureWithPopulation.prefName; // ex. 北海道
     prefectureWithPopulation.populationDataList.forEach((populationData, index) => {
