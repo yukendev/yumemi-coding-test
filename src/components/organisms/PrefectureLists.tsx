@@ -1,12 +1,28 @@
 import { PrefectureItem } from '../molecules/PrefectureItem';
 
 import styles from './PrefectureLists.module.scss';
+import { useFetchPrefLists } from '../../api/hook/useFetchPrefLists';
+import { LoadingSpinner } from './LoadingSpinner';
+import { ErrorAlert } from './ErrorAlert';
 
 export const PrefectureLists = (): JSX.Element => {
-  const prefectureItems: JSX.Element[] = [];
+  const { prefectures, error } = useFetchPrefLists();
 
-  for (let i = 0; i < 48; i++) {
-    prefectureItems.push(<PrefectureItem />);
+  // 都道府県取得時にエラーが発生した場合
+  if (error != null) {
+    return <ErrorAlert message={error} />;
   }
-  return <ul className={styles.prefectureLists}>{prefectureItems}</ul>;
+
+  // ローディング中
+  if (prefectures == null) {
+    return <LoadingSpinner />;
+  }
+
+  return (
+    <ul className={styles.prefectureLists}>
+      {prefectures.map((pref) => (
+        <PrefectureItem key={pref.prefCode} prefName={pref.prefName} />
+      ))}
+    </ul>
+  );
 };

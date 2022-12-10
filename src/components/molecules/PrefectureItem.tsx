@@ -2,11 +2,16 @@ import { Checkbox } from '../atoms/Checkbox';
 import { PrefectureLabel } from '../atoms/PrefectureLabel';
 import styles from './PrefectureItem.module.scss';
 
-export const PrefectureItem = (): JSX.Element => {
+type PrefectureItemProps = {
+  prefName: string;
+};
+
+export const PrefectureItem = (props: PrefectureItemProps): JSX.Element => {
+  const { prefName } = props;
   return (
     <li className={styles.prefectureItem}>
       <Checkbox />
-      <PrefectureLabel />
+      <PrefectureLabel prefName={prefName} />
     </li>
   );
 };
