@@ -8,8 +8,8 @@ import {
   Legend,
   ResponsiveContainer,
 } from 'recharts';
-import { useFetchPopulationFromPrefCode } from 'src/api/hook/useFetchPopulationFromPrefCode';
 import { useFetchPopulationDataForChart } from 'src/api/hook/useFetchPopulationDataForChart';
+import { ErrorAlert } from './ErrorAlert';
 import { LoadingSpinner } from './LoadingSpinner';
 
 const examplePrefs = [
@@ -34,6 +34,11 @@ const examplePrefs = [
 export const Chart = (): JSX.Element => {
   const { formattedData, error } = useFetchPopulationDataForChart(examplePrefs);
 
+  // 人口構成取得時にエラーが発生した場合
+  if (error != null) {
+    return <ErrorAlert message={error} />;
+  }
+
   // ローディング中
   if (formattedData == null) {
     return <LoadingSpinner />;
@@ -56,10 +61,9 @@ export const Chart = (): JSX.Element => {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Line type='monotone' dataKey='北海道' stroke='#82ca9d' />
-      <Line type='monotone' dataKey='青森県' stroke='#82ca9d' />
-      <Line type='monotone' dataKey='岩手県' stroke='#82ca9d' />
-      <Line type='monotone' dataKey='宮城県' stroke='#82ca9d' />
+      {examplePrefs.map((pref) => (
+        <Line key={pref.prefCode} dataKey={pref.prefName} />
+      ))}
     </LineChart>
   );
 };
