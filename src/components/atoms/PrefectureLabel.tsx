@@ -1,3 +1,9 @@
-export const PrefectureLabel = (): JSX.Element => {
-  return <label>静岡県</label>;
+type PrefectureLabelProps = {
+  prefName: string;
+};
+
+export const PrefectureLabel = (props: PrefectureLabelProps): JSX.Element => {
+  const { prefName } = props;
+
+  return <label>{prefName}</label>;
 };
