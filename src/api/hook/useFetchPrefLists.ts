@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Prefecture } from '@commonType';
 import { APIResponsePrefLists } from '@responseType';
-import { URL_GET_PREFECTURE_LIST } from '../data';
+import { URL_GET_PREFECTURE_LIST } from '../urls';
 import { fetcher } from '../fetcher';
 
 type UseFetchPrefListsResponse = {
