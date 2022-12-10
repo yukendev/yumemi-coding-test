@@ -21,7 +21,7 @@ export const PrefectureLists = (): JSX.Element => {
   return (
     <ul className={styles.prefectureLists}>
       {prefectures.map((pref) => (
-        <PrefectureItem key={pref.prefCode} prefName={pref.prefName} />
+        <PrefectureItem key={pref.prefCode} prefCode={pref.prefCode} prefName={pref.prefName} />
       ))}
     </ul>
   );

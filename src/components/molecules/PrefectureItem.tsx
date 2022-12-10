@@ -1,16 +1,18 @@
+import { Prefecture } from '@commonType';
 import { Checkbox } from '../atoms/Checkbox';
 import { PrefectureLabel } from '../atoms/PrefectureLabel';
 import styles from './PrefectureItem.module.scss';
 
-type PrefectureItemProps = {
-  prefName: string;
-};
+export const PrefectureItem = (props: Prefecture): JSX.Element => {
+  const { prefCode, prefName } = props;
 
-export const PrefectureItem = (props: PrefectureItemProps): JSX.Element => {
-  const { prefName } = props;
+  const onChangeHandler = () => {
+    console.log('チェックボックス');
+  };
+
   return (
     <li className={styles.prefectureItem}>
-      <Checkbox />
+      <Checkbox onChange={onChangeHandler} />
       <PrefectureLabel prefName={prefName} />
     </li>
   );
