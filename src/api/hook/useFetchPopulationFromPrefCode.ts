@@ -4,14 +4,7 @@ import { useEffect, useState } from 'react';
 import { fetcher } from '../fetcher';
 import { URL_GET_POPULATION_FROM_PREF_CODE } from '../urls';
 
-type UseFetchPopulationFromPrefCodeResponse = {
-  populationData: PopulationData[] | undefined;
-  error: string | undefined;
-};
-
-export const useFetchPopulationFromPrefCode = (
-  prefCode: number,
-): UseFetchPopulationFromPrefCodeResponse => {
+export const useFetchPopulationFromPrefCode = (prefCode: number) => {
   const [populationData, setPopulationData] = useState<PopulationData[]>();
   const [error, setError] = useState<string>();
 

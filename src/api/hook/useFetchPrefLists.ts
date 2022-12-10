@@ -4,12 +4,7 @@ import { APIResponsePrefLists } from '@responseType';
 import { URL_GET_PREFECTURE_LIST } from '../urls';
 import { fetcher } from '../fetcher';
 
-type UseFetchPrefListsResponse = {
-  prefectures: Prefecture[] | undefined;
-  error: string | undefined;
-};
-
-export const useFetchPrefLists = (): UseFetchPrefListsResponse => {
+export const useFetchPrefLists = () => {
   const [prefectures, setPrefectures] = useState<Prefecture[]>();
   const [error, setError] = useState<string>();
 
