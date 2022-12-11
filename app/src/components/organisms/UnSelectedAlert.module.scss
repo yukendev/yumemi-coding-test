@@ -1,4 +1,5 @@
-.unselectedAlertContainer {
+.unselectedAlertContainer :global {
+  margin-top: 50px;
   text-align: center;
 
   .unselectedAlert {

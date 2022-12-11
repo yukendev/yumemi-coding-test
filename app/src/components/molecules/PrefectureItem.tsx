@@ -5,7 +5,7 @@ import { PrefectureLabel } from '../atoms/PrefectureLabel';
 import styles from './PrefectureItem.module.scss';
 
 export const PrefectureItem = (props: Prefecture): JSX.Element => {
-  const { prefName } = props;
+  const { prefCode, prefName } = props;
   const { togglePrefectureSelect } = useTogglePrefecture(props);
 
   const onChangeHandler = () => {
@@ -14,8 +14,8 @@ export const PrefectureItem = (props: Prefecture): JSX.Element => {
 
   return (
     <li className={styles.prefectureItem}>
-      <Checkbox onChange={onChangeHandler} />
-      <PrefectureLabel prefName={prefName} />
+      <Checkbox prefCode={prefCode} onChange={onChangeHandler} />
+      <PrefectureLabel prefCode={prefCode} prefName={prefName} />
     </li>
   );
 };

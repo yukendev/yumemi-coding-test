@@ -1,3 +1,5 @@
+import styles from './HeaderTitle.module.scss';
+
 export const HeaderTitle = (): JSX.Element => {
-  return <h1>都道府県の人口推移</h1>;
+  return <div className={styles.title}>都道府県の人口推移</div>;
 };
