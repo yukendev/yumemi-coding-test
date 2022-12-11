@@ -1,4 +1,4 @@
-import { PopulationDataForChart, PrefectureWithPopulation } from '@commonType';
+import { PopulationDataForChart, PrefectureWithPopulation } from 'src/utils/commonType';
 
 // 複数都道府県の人口構成データの配列を受け取って、グラフ用のデータに整形するメソッド
 export const formatDataForChart = (prefectureWithPopulationList: PrefectureWithPopulation[]) => {

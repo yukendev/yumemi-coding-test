@@ -1,4 +1,4 @@
-import { Prefecture } from '@commonType';
+import { Prefecture } from 'src/utils/commonType';
 import { useTogglePrefecture } from 'src/store/selectedPrefecturesState';
 import { Checkbox } from '../atoms/Checkbox';
 import { PrefectureLabel } from '../atoms/PrefectureLabel';

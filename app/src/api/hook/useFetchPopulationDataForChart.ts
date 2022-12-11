@@ -1,4 +1,4 @@
-import { PopulationDataForChart } from '@commonType';
+import { PopulationDataForChart } from 'src/utils/commonType';
 import { useEffect, useState } from 'react';
 import { useSelectedPrefecturesState } from 'src/store/selectedPrefecturesState';
 import { formatDataForChart } from 'src/utils/formatDataForChart';

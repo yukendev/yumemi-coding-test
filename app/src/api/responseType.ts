@@ -1,4 +1,4 @@
-import { Prefecture, PopulationData, PopulationDataType } from '@commonType';
+import { Prefecture, PopulationData, PopulationDataType } from 'src/utils/commonType';
 
 // 都道府県一覧
 // 参考: https://opendata.resas-portal.go.jp/docs/api/v1/prefectures.html

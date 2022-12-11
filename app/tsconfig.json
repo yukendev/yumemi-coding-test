@@ -17,7 +17,7 @@
     "jsx": "react-jsx",
     "baseUrl": "./",
     "paths": {
-      "@commonType": ["src/commonType.ts"],
+      "@commonType": ["src/utils/commonType.ts"],
       "@responseType": ["src/api/responseType.ts"]
     }
   }
