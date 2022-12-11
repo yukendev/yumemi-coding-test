@@ -28,7 +28,6 @@ export const useFetchPopulationDataForChart = () => {
         setFormattedData(formattedData);
         setError(undefined);
       } catch (error) {
-        console.log(error);
         setError('都道府県コードから総人口が取得できませんでした');
       }
     };

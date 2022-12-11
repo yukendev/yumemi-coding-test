@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import { Prefecture } from '@commonType';
 import styles from './PrefectureLabel.module.scss';
 
-export const PrefectureLabel = (props: Prefecture): JSX.Element => {
+export const PrefectureLabel = memo((props: Prefecture): JSX.Element => {
   const { prefCode, prefName } = props;
 
   return (
@@ -9,4 +10,6 @@ export const PrefectureLabel = (props: Prefecture): JSX.Element => {
       {prefName}
     </label>
   );
-};
+});
+
+PrefectureLabel.displayName = 'PrefectureLabel';

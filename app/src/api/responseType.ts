@@ -12,7 +12,6 @@ export type APIResponsePrefLists = {
 export type APIResponsePopulationFromPrefCode = {
   message: string | null;
   result: {
-    boundaryYear: number; // 実績値と推計値の区切り年
     data: {
       label: PopulationDataType;
       data: PopulationData[];
