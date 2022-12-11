@@ -27,23 +27,30 @@ export const Chart = (): JSX.Element => {
   return (
     <LineChart
       className={styles.chart}
-      width={500}
-      height={300}
+      width={800}
+      height={400}
       data={formattedData}
       margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5,
+        top: 20,
+        right: 60,
+        left: 60,
+        bottom: 20,
       }}
     >
       <CartesianGrid strokeDasharray='3 3' />
-      <XAxis dataKey='year' />
-      <YAxis />
+      <XAxis
+        dataKey='year'
+        label={{
+          value: '年',
+          offset: -10,
+          position: 'insideBottomRight',
+        }}
+      />
+      <YAxis label={{ value: '総人口', offset: -40, angle: -90, position: 'insideLeft' }} />
       <Tooltip />
-      <Legend />
+      <Legend layout='vertical' verticalAlign='middle' align='right' />
       {selectedPrefs.map((pref) => (
-        <Line key={pref.prefCode} dataKey={pref.prefName} />
+        <Line key={pref.prefCode} dataKey={pref.prefName} dot={false} />
       ))}
     </LineChart>
   );
