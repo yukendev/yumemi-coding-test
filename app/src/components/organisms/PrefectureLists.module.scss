@@ -1,6 +1,12 @@
+@import '../../styles/mixin';
+
 .prefectureLists {
   display: flex;
   flex-wrap: wrap;
-  padding: 30px 60px;
   margin: 0;
+  padding: 10px 10px;
+
+  @include media(md) {
+    padding: 30px 60px;
+  }
 }
