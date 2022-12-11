@@ -1,11 +1,12 @@
+import { Prefecture } from '@commonType';
 import styles from './PrefectureLabel.module.scss';
 
-type PrefectureLabelProps = {
-  prefName: string;
-};
+export const PrefectureLabel = (props: Prefecture): JSX.Element => {
+  const { prefCode, prefName } = props;
 
-export const PrefectureLabel = (props: PrefectureLabelProps): JSX.Element => {
-  const { prefName } = props;
-
-  return <label className={styles.prefectureLabel}>{prefName}</label>;
+  return (
+    <label htmlFor={prefCode.toString()} className={styles.prefectureLabel}>
+      {prefName}
+    </label>
+  );
 };
