@@ -15,7 +15,7 @@ services:
       - "80:80"
       - "443:443"
     environment:
-      DOMAINS: "test.yukendev.com -> http://app:80"
+      DOMAINS: "yumemitest.yukendev.com -> http://app:80"
       STAGE: "production"
     volumes:
       - https-portal-data:/var/lib/https-portal
