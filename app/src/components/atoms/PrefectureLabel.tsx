@@ -1,3 +1,5 @@
+import styles from './PrefectureLabel.module.scss';
+
 type PrefectureLabelProps = {
   prefName: string;
 };
@@ -5,5 +7,5 @@ type PrefectureLabelProps = {
 export const PrefectureLabel = (props: PrefectureLabelProps): JSX.Element => {
   const { prefName } = props;
 
-  return <label>{prefName}</label>;
+  return <label className={styles.prefectureLabel}>{prefName}</label>;
 };
