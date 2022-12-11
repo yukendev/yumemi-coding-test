@@ -5,6 +5,7 @@ import { LoadingSpinner } from './LoadingSpinner';
 import { UnSelectedAlert } from './UnSelectedAlert';
 
 import styles from './Chart.module.scss';
+import { colors } from 'src/utils/color';
 
 export const Chart = (): JSX.Element => {
   const { selectedPrefs, formattedData, error } = useFetchPopulationDataForChart();
@@ -50,7 +51,12 @@ export const Chart = (): JSX.Element => {
       <Tooltip />
       <Legend layout='vertical' verticalAlign='middle' align='right' />
       {selectedPrefs.map((pref) => (
-        <Line key={pref.prefCode} dataKey={pref.prefName} dot={false} />
+        <Line
+          key={pref.prefCode}
+          dataKey={pref.prefName}
+          dot={false}
+          stroke={colors[pref.prefCode]}
+        />
       ))}
     </LineChart>
   );
