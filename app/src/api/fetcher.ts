@@ -1,4 +1,4 @@
-import { Prefecture, PrefectureWithPopulation } from '@commonType';
+import { Prefecture, PrefectureWithPopulation } from 'src/utils/commonType';
 import { APIResponsePopulationFromPrefCode, APIResponsePrefLists } from '@responseType';
 import axios, { AxiosResponse } from 'axios';
 import { URL_GET_POPULATION_FROM_PREF_CODE, URL_GET_PREFECTURE_LIST } from './urls';

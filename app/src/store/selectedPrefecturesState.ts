@@ -1,4 +1,4 @@
-import { Prefecture } from '@commonType';
+import { Prefecture } from 'src/utils/commonType';
 import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
 
 const selectedPrefecturesState = atom<Prefecture[]>({

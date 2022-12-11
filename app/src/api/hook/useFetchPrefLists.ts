@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Prefecture } from '@commonType';
+import { Prefecture } from 'src/utils/commonType';
 import { fetchPrefList } from '../fetcher';
 
 export const useFetchPrefLists = () => {
