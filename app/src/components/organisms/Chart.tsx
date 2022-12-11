@@ -49,7 +49,12 @@ export const Chart = (): JSX.Element => {
       />
       <YAxis label={{ value: '総人口', offset: -40, angle: -90, position: 'insideLeft' }} />
       <Tooltip />
-      <Legend layout='vertical' verticalAlign='middle' align='right' />
+      <Legend
+        layout='vertical'
+        verticalAlign='middle'
+        align='right'
+        wrapperStyle={{ paddingLeft: 30, height: 400, overflowY: 'scroll' }}
+      />
       {selectedPrefs.map((pref) => (
         <Line
           key={pref.prefCode}
