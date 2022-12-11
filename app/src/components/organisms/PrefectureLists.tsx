@@ -4,6 +4,7 @@ import styles from './PrefectureLists.module.scss';
 import { useFetchPrefLists } from '../../api/hook/useFetchPrefLists';
 import { LoadingSpinner } from './LoadingSpinner';
 import { ErrorAlert } from './ErrorAlert';
+import { PrefectureListTitle } from '../molecules/PrefectureListTitle';
 
 export const PrefectureLists = (): JSX.Element => {
   const { prefectures, error } = useFetchPrefLists();
@@ -19,10 +20,13 @@ export const PrefectureLists = (): JSX.Element => {
   }
 
   return (
-    <ul className={styles.prefectureLists}>
-      {prefectures.map((pref) => (
-        <PrefectureItem key={pref.prefCode} prefCode={pref.prefCode} prefName={pref.prefName} />
-      ))}
-    </ul>
+    <>
+      <PrefectureListTitle />
+      <ul className={styles.prefectureLists}>
+        {prefectures.map((pref) => (
+          <PrefectureItem key={pref.prefCode} prefCode={pref.prefCode} prefName={pref.prefName} />
+        ))}
+      </ul>
+    </>
   );
 };
