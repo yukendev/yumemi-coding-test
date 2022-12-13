@@ -15,9 +15,29 @@ import { UnSelectedAlert } from './UnSelectedAlert';
 
 import styles from './Chart.module.scss';
 import { colors } from 'src/utils/color';
+import { useState } from 'react';
+
+// rechart.jsではLegendにクラスを付与できないため、
+// 画面の大きさでLegendのプロパティを変更したい場合、jsで画面の大きさを監視する必用がある
+const useIsLegendRight = () => {
+  const mql = window.matchMedia('(max-width: 600px)');
+  const initialValue = mql.matches ? true : false;
+  const [isLegendRight, setIsLegendRight] = useState<boolean>(initialValue);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const screenChange = (e: any) => {
+    if (e.matches) {
+      setIsLegendRight(false);
+    } else {
+      setIsLegendRight(true);
+    }
+  };
+  mql.addEventListener('change', screenChange);
+  return isLegendRight;
+};
 
 export const Chart = (): JSX.Element => {
   const { selectedPrefs, formattedData, error } = useFetchPopulationDataForChart();
+  const isLegendRight = useIsLegendRight();
 
   // 人口構成取得時にエラーが発生した場合
   if (error != null) {
@@ -58,10 +78,14 @@ export const Chart = (): JSX.Element => {
           <YAxis label={{ value: '人口数', offset: -40, angle: -90, position: 'insideLeft' }} />
           <Tooltip />
           <Legend
-            layout='vertical'
-            verticalAlign='middle'
-            align='right'
-            wrapperStyle={{ paddingLeft: 30, height: 400, overflowY: 'scroll' }}
+            layout={isLegendRight ? 'vertical' : 'horizontal'}
+            verticalAlign={isLegendRight ? 'middle' : 'bottom'}
+            align={isLegendRight ? 'right' : 'center'}
+            wrapperStyle={{
+              paddingLeft: isLegendRight ? 30 : 0,
+              overflowY: 'scroll',
+              maxHeight: isLegendRight ? 400 : 80,
+            }}
           />
           {selectedPrefs.map((pref) => (
             <Line
