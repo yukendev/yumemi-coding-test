@@ -3,6 +3,7 @@
 .chartWrapper {
   margin: 0 auto;
   width: 100%;
+  max-width: 1200px;
   height: 400px;
 
   @include media(md) {
