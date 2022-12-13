@@ -21,7 +21,7 @@ import { useState } from 'react';
 // 画面の大きさでLegendのプロパティを変更したい場合、jsで画面の大きさを監視する必用がある
 const useIsLegendRight = () => {
   const mql = window.matchMedia('(max-width: 600px)');
-  const initialValue = mql.matches ? true : false;
+  const initialValue = !mql.matches;
   const [isLegendRight, setIsLegendRight] = useState<boolean>(initialValue);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const screenChange = (e: any) => {
