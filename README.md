@@ -7,17 +7,16 @@ https://yumemitest.yukendev.com
 - 一人でしか開発していないが、差分でのダブルチェックや誤った push などを防ぐために、PR を作成し自分でマージする方法を採用
 - ブランチの命名や、コミット名などは一人なので特に規則は設けていない
 
-# 実装について
+# アプリケーションの実装について
 
+- ビルドしたファイルを Nginx で表示
 - TypeScript, React を用いてアプリケーションを作成
 - 型を定義したファイルなどは、`tsconfig`のエイリアスなどを利用して使いやすくした
 - コンポーネントの粒度は Atmic Design を参考にしながら分割
 - API のキーに関してはリクエストのヘッダなどに記述してあるので完全に隠すことは不可能だが、`.env`ファイルを用いてできるだけ手元でのみ管理し、リポジトリでは管理しないようにした
 
-# デプロイについて
-
-- ビルドしたファイルを Nginx で表示
-- docker compose と https-portal を使用することで https 通信している
+# インフラの構成について
+- docker compose と [https-portal](https://github.com/SteveLTN/https-portal) を使用することで https 通信している
 - Google Computed Engine で docker compose を用いて、サーバーを起動
 - CD は導入しておらず、手元でビルドしたイメージを手動で gcr に push している
 
