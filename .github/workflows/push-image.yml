@@ -1,17 +1,41 @@
-name: GitHub Actions Demo
-on: [push]
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  GCP_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  IMAGE: gcr.io/${{ secrets.GCP_PROJECT_ID }}/project-image:${{ github.sha }}
+
 jobs:
-  Explore-GitHub-Actions:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
+      # リポジトリをチェックアウト
+      - name: "Checkout the repository"
         uses: actions/checkout@v3
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+
+      # GCP 認証
+      - id: "auth"
+        uses: "google-github-actions/auth@v1"
+        with:
+          credentials_json: $GCP_CREDENTIALS
+
+      # gcloud コマンドの設定
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v0"
+
+      # Docker に gcloud コマンドの Credential を使わせる
+      - name: "Configure docker to use the gcloud cli"
+        run: gcloud auth configure-docker --quiet
+
+      # Docker イメージを作成
+      - name: "Build a docker image"
+        run: docker build -t $IMAGE .
+
+      # Docker イメージを Container Registry に Push
+      - name: "Push the docker image to Container Registry"
+        run: docker push $IMAGE
