@@ -12,12 +12,14 @@ https://yumemitest.yukendev.com
 - ビルドしたファイルを Nginx で表示
 - TypeScript, React を用いてアプリケーションを作成
 - 型を定義したファイルなどは、`tsconfig`のエイリアスなどを利用して使いやすくした
-- コンポーネントの粒度は Atmic Design を参考にしながら分割
+- コンポーネントの粒度は Atomic Design を参考にしながら分割
 - API のキーに関してはリクエストのヘッダなどに記述してあるので完全に隠すことは不可能だが、`.env`ファイルを用いてできるだけ手元でのみ管理し、リポジトリでは管理しないようにした
 
-# インフラの構成について
+# アプリケーション・インフラの構成について
 - docker compose と [https-portal](https://github.com/SteveLTN/https-portal) を使用することで https 通信している
 - Google Computed Engine で docker compose を用いて、サーバーを起動
+
+# その他
 - CD は導入しておらず、手元でビルドしたイメージを手動で gcr に push している
 
 # 懸念点（FB いただけるとありがたいです）
