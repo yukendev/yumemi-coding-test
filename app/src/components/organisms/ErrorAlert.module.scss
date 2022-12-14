@@ -1,0 +1,8 @@
+.errorContainer :global {
+  text-align: center;
+
+  .errorAlert {
+    color: red;
+    font-weight: bold;
+  }
+}

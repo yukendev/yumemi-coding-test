@@ -1,0 +1,10 @@
+@import '../../styles/variables';
+
+.prefectureItem {
+  list-style: none;
+  width: $prefectureItemWidth;
+  vertical-align: middle;
+  display: flex;
+  align-items: center;
+  margin: $prefectureItemMarginVertical $prefectureItemMarginHorizaontal;
+}

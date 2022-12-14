@@ -1,0 +1,24 @@
+@import '../../styles/mixin';
+@import '../../styles/variables';
+
+$itemWidth: $prefectureItemWidth + $prefectureItemMarginHorizaontal * 2;
+
+.prefectureLists {
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px 10px;
+
+  // 都道府県3列
+  width: $itemWidth * 3;
+
+  @include media(md) {
+    // 都道府県5列
+    width: $itemWidth * 5;
+  }
+
+  @include media(xl) {
+    // 都道府県7列
+    width: $itemWidth * 7;
+  }
+}
