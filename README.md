@@ -1,6 +1,6 @@
 # 作成したアプリケーション
 
-https://yumemitest.yukendev.com
+https://sample.yukendev.com
 
 # 開発について
 
@@ -16,10 +16,12 @@ https://yumemitest.yukendev.com
 - API のキーに関してはリクエストのヘッダなどに記述してあるので完全に隠すことは不可能だが、`.env`ファイルを用いてできるだけ手元でのみ管理し、リポジトリでは管理しないようにした
 
 # アプリケーション・インフラの構成について
+
 - docker compose と [https-portal](https://github.com/SteveLTN/https-portal) を使用することで https 通信している
 - Google Computed Engine で docker compose を用いて、サーバーを起動
 
 # その他
+
 - CD は導入しておらず、手元でビルドしたイメージを手動で gcr に push している
 
 # 懸念点（FB いただけるとありがたいです）
